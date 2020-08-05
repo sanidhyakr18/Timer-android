@@ -3,6 +3,7 @@ package com.sandystudios.timer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         btnReset.setVisibility(View.INVISIBLE);
 
         etSec.requestFocus();
+        btnStart.setTextColor(Color.GRAY);
 
         etSec.addTextChangedListener(new TextWatcher() {
             @Override
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 int totalSec = Integer.parseInt(etSec.getText().toString());
                 btnPause.setVisibility(View.VISIBLE);
                 btnReset.setVisibility(View.VISIBLE);
-                btnStart.setEnabled(false);
+                btnStart.setVisibility(View.INVISIBLE);
                 etSec.setEnabled(false);
                 isPaused = false;
                 pauseTime = 0;
@@ -133,8 +135,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void processButtonByTextLength() {
         if (etSec.getText().toString().length() == 0) {
+            btnStart.setTextColor(Color.GRAY);
             btnStart.setEnabled(false);
         } else {
+            btnStart.setTextColor(getColor(R.color.colorPrimary));
             btnStart.setEnabled(true);
         }
     }
@@ -162,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void reset() {
-        btnStart.setEnabled(true);
+        btnStart.setVisibility(View.VISIBLE);
         etSec.setEnabled(true);
         btnPause.setVisibility(View.INVISIBLE);
         btnReset.setVisibility(View.INVISIBLE);
